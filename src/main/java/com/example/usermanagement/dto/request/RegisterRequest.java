@@ -1,16 +1,15 @@
 package com.example.usermanagement.dto.request;
 
-import lombok.*;
+import javax.validation.constraints.NotBlank;
 
-@Getter
-@Setter
-@NoArgsConstructor
-@AllArgsConstructor
-@Builder
-public class RegisterRequest {
-    private String name;
-    private String surname;
-    private String email;
-    private String username;
-    private String password;
+
+public record RegisterRequest(
+
+        @NotBlank String name,
+        @NotBlank String surname,
+        @NotBlank String email,
+        @NotBlank String username,
+        @NotBlank String password
+
+) {
 }

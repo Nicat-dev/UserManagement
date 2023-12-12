@@ -13,37 +13,37 @@ import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/api/v1/user")
+@RequestMapping("/api/v1/users")
 public class UserController {
 
     private final UserService service;
 
-    @PostMapping("/save")
-    public ResponseEntity<UserDto> save(@Valid @RequestBody RegisterRequest request){
-        final var dto = service.registerUser(request);
+    @PostMapping
+    public ResponseEntity<UserDto> save(@Valid @RequestBody RegisterRequest request) {
+        final var dto = service.create(request);
         final var location = ServletUriComponentsBuilder.fromCurrentContextPath().path("/{id}").build(dto.getId());
         return ResponseEntity.created(location).body(dto);
     }
 
-    @PutMapping("/update/{id}")
-    public ResponseEntity<UserDto> updateById(@Valid @RequestBody RegisterRequest request,@PathVariable Long id){
-        final var dto = service.updateUser(request,id);
+    @PutMapping("/{id}")
+    public ResponseEntity<UserDto> updateById(@Valid @RequestBody RegisterRequest request,
+                                              @PathVariable Long id) {
+        final var dto = service.update(request, id);
         final var location = ServletUriComponentsBuilder.fromCurrentContextPath().path("/{id}").build(id);
         return ResponseEntity.created(location).body(dto);
     }
 
     @GetMapping
-    public ResponseEntity<List<UserDto>> getAll(){
+    public ResponseEntity<List<UserDto>> getAll() {
         final var dtoList = service.getAll();
         return ResponseEntity.ok().body(dtoList);
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteById(@PathVariable Long id){
-        service.deleteById(id);
+    public ResponseEntity<Void> deleteById(@PathVariable Long id) {
+        service.delete(id);
         return ResponseEntity.noContent().build();
     }
-
 
 
 }

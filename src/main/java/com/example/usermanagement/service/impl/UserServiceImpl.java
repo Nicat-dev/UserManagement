@@ -21,37 +21,37 @@ public class UserServiceImpl implements UserService {
     private final UserMapper mapper;
 
     @Override
-    public UserDto registerUser(RegisterRequest request) {
-        return mapper.entityToDto(repository.save(mapper.requestToEntity(request)));
+    public UserDto create(RegisterRequest request) {
+        return mapper.mapToDto(repository.save(mapper.requestToEntity(request)));
     }
 
     @Override
-    public UserDto updateUser(RegisterRequest request, Long id) {
-        idNullCheck(id);
-        return mapper.entityToDto(repository.save(mapper.requestToEntity(request)));
+    public UserDto update(RegisterRequest request, Long id) {
+        // todo: check username, email unique
+        return mapper.mapToDto(repository.save(mapper.requestToEntity(request)));
     }
 
     @Override
-    public void deleteById(Long id) {
+    public void delete(Long id) {
         idNullCheck(id);
         repository.deleteById(id);
     }
 
     @Override
-    public UserDto findById(Long id) {
-        return entityToDto(id);
+    public UserDto getOne(Long id) {
+        return findBy(id);
     }
 
     @Override
     public List<UserDto> getAll() {
-        return mapper.entityListToDtoList(repository.findAll());
+        return mapper.mapToDto(repository.findAll());
     }
 
 
     //******Method Validations*****
 
-    private UserDto entityToDto(Long id){
-        return mapper.entityToDto(repository.findById(id)
+    private UserDto findBy(Long id){
+        return mapper.mapToDto(repository.findById(id)
                     .orElseThrow(()-> new ResourceNotFoundException("User","id",id)));
     }
 

@@ -7,10 +7,10 @@ import java.util.List;
 
 public interface UserService {
 
-    UserDto registerUser(RegisterRequest request);
-    UserDto updateUser(RegisterRequest request,Long id);
-    void deleteById(Long id);
-    UserDto findById(Long id);
+    UserDto create(RegisterRequest request);
+    UserDto update(RegisterRequest request, Long id);
+    void delete(Long id);
+    UserDto getOne(Long id);
     List<UserDto> getAll();
 
 }
