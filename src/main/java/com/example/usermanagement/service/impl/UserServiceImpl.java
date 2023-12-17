@@ -2,6 +2,7 @@ package com.example.usermanagement.service.impl;
 
 import com.example.usermanagement.dto.UserDto;
 import com.example.usermanagement.dto.request.RegisterRequest;
+import com.example.usermanagement.exception.ResourceExistsException;
 import com.example.usermanagement.exception.ResourceIdCanNotBeNull;
 import com.example.usermanagement.exception.ResourceNotFoundException;
 import com.example.usermanagement.mapper.UserMapper;
@@ -22,12 +23,14 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public UserDto create(RegisterRequest request) {
+        emailAndUsernameValidation(request.email());
         return mapper.mapToDto(repository.save(mapper.requestToEntity(request)));
     }
 
     @Override
     public UserDto update(RegisterRequest request, Long id) {
         // todo: check username, email unique
+        emailAndUsernameValidation(request.email());
         return mapper.mapToDto(repository.save(mapper.requestToEntity(request)));
     }
 
@@ -58,6 +61,12 @@ public class UserServiceImpl implements UserService {
     private void idNullCheck(Long id){
         if (Objects.isNull(id)){
             throw new ResourceIdCanNotBeNull("null","Id cannot be null",id);
+        }
+    }
+
+    private void emailAndUsernameValidation(String email){
+        if (repository.existsByEmail(email)){
+            throw new ResourceExistsException("Email is exist",email,email);
         }
     }
 

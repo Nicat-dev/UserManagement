@@ -39,6 +39,12 @@ public class UserController {
         return ResponseEntity.ok().body(dtoList);
     }
 
+    @GetMapping("/{id}")
+    public ResponseEntity<UserDto> getOne(@PathVariable Long id){
+        final var dto = service.getOne(id);
+        return ResponseEntity.ok().body(dto);
+    }
+
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteById(@PathVariable Long id) {
         service.delete(id);
