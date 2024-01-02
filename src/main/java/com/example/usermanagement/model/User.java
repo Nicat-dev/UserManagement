@@ -24,9 +24,7 @@ public class User {
     private String name;
     @Column(name = "surname",nullable = false)
     private String surname;
-    @Column(name = "username",nullable = false,unique = true)
-    @Min(value = 8,message = "username cannot be under the 8 symbol")
-    @Max(value = 16,message = "username cannot be over the 16 symbol")
+    @Column(name = "username",nullable = false,unique = true, length = 50)
     private String username;
 
     @Column(name = "password",nullable = false)
@@ -35,9 +33,8 @@ public class User {
 
     // todo: save picture in server and save meta data (path, size, filename, extension)
     @Column(name = "profilePicture")
-    private byte[] profilePicture;
+    private String profilePicture;
 
     @Column(name = "email",nullable = false,unique = true)
-    @Email(regexp = "^[a-zA-Z0-9_+&*-]+(?:\\.[a-zA-Z0-9_+&*-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,7}$")
     private String email;
 }

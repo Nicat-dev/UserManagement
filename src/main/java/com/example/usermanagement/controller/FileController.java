@@ -1,7 +1,6 @@
 package com.example.usermanagement.controller;
 
 import com.example.usermanagement.service.FileStorageService;
-import lombok.RequiredArgsConstructor;
 import org.springframework.core.io.Resource;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -12,10 +11,15 @@ import org.springframework.web.multipart.MultipartFile;
 
 @RestController
 @RequestMapping(name = "/api/v1/file")
-@RequiredArgsConstructor
 public class FileController {
 
     private final FileStorageService fileStorageService;
+
+    public FileController(FileStorageService fileStorageService) {
+        this.fileStorageService = fileStorageService;
+    }
+
+
     @PostMapping("/uploadFile")
     public ResponseEntity<String> uploadFile(@RequestParam("file") MultipartFile file) {
         String fileName = fileStorageService.storeFile(file);

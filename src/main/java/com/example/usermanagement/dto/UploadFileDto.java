@@ -8,7 +8,6 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 public class UploadFileDto {
-
     private String fileName;
     private String fileType;
     private long fileSize;
