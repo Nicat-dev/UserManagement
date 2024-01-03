@@ -3,7 +3,7 @@ package com.example.usermanagement.controller;
 import com.example.usermanagement.dto.UserDto;
 import com.example.usermanagement.dto.request.RegisterRequest;
 import com.example.usermanagement.service.UserService;
-import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
@@ -12,11 +12,11 @@ import javax.validation.Valid;
 import java.util.List;
 
 @RestController
-@RequiredArgsConstructor
 @RequestMapping("/api/v1/users")
 public class UserController {
 
-    private final UserService service;
+    @Autowired
+    private UserService service;
 
     @PostMapping
     public ResponseEntity<UserDto> save(@Valid @RequestBody RegisterRequest request) {

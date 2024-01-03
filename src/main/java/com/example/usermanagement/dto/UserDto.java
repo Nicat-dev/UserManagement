@@ -19,4 +19,9 @@ public class UserDto {
     @Min(value = 8,message = "username cannot be under the 8 symbol")
     @Max(value = 16,message = "username cannot be over the 16 symbol")
     private String username;
+
+    // Manually add the getId() method
+    public Long getId() {
+        return id;
+    }
 }
