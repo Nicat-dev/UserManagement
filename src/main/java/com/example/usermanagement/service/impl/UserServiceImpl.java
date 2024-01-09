@@ -9,6 +9,7 @@ import com.example.usermanagement.mapper.UserMapper;
 import com.example.usermanagement.repository.UserRepository;
 import com.example.usermanagement.service.UserService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
